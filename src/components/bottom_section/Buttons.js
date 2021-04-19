@@ -29,25 +29,28 @@ const Buttons = ({
   setCurrentValue,
   currentValue,
   operation,
-  setOperation
+  setOperation,
 }) => {
-
   const currentValueAsNumber = Number(currentValue);
   const displayValueAsNumber = Number(displayValue);
   const displayValueAsString = String(displayValue);
+
+  const handleButtonClick = ({ target: { value } }) => {
+    getButtonValue(value);
+  };
 
   const getButtonValue = value => {
     if (displayValue === 0 || waitingValue) {
       setDisplayValue(value);
       setWaitingValue(false);
     } else if (displayValueAsString.length < MAX_CHARACTERS)
-      setDisplayValue(displayValue + BLANK + value);
+      setDisplayValue(displayValueAsString + value);
   };
 
   const checkResultLength = result => {
     const resultAsString = String(result);
     if (resultAsString.length > MAX_CHARACTERS) {
-      return resultAsString.slice(0, MAX_CHARACTERS - 1 ) + 'e';
+      return resultAsString.slice(0, MAX_CHARACTERS - 1) + 'e';
     } else return result;
   };
 
@@ -91,7 +94,7 @@ const Buttons = ({
       <AllClearButton
         setDisplayValue={setDisplayValue}
         setCurrentValue={setCurrentValue}
-        setOperation = {setOperation}
+        setOperation={setOperation}
       />
       <SignButton
         displayValue={displayValue}
@@ -101,7 +104,6 @@ const Buttons = ({
       <PercentageButton
         displayValue={displayValue}
         setWaitingValue={setWaitingValue}
-        setCurrentValue={setCurrentValue}
         currentValue={currentValue}
         setDisplayValue={setDisplayValue}
         checkResultLength={checkResultLength}
@@ -114,62 +116,14 @@ const Buttons = ({
         operation={operation}
         waitingValue={waitingValue}
         displayResult={displayResult}
-        setOperation = {setOperation}
+        setOperation={setOperation}
       />
 
-      <button className="button" onClick={() => getButtonValue(7)}>
-        7
-      </button>
-      <button className="button" onClick={() => getButtonValue(8)}>
-        8
-      </button>
-      <button className="button" onClick={() => getButtonValue(9)}>
-        9
-      </button>
+      <input type="button" value={7} onClick={handleButtonClick} />
+      <input type="button" value={8} onClick={handleButtonClick} />
+      <input type="button" value={9} onClick={handleButtonClick} />
 
       <MultiplyButton
-        displayValue={displayValue}
-        setWaitingValue={setWaitingValue}
-        setCurrentValue={setCurrentValue}
-        currentValue={currentValue}
-        operation={operation}
-        waitingValue={waitingValue}
-        displayResult={displayResult}
-        setOperation = {setOperation}
-      />
-
-      <button className="button" onClick={() => getButtonValue(4)}>
-        4
-      </button>
-      <button className="button" onClick={() => getButtonValue(5)}>
-        5
-      </button>
-      <button className="button" onClick={() => getButtonValue(6)}>
-        6
-      </button>
-
-      <MinusButton
-        displayValue={displayValue}
-        setWaitingValue={setWaitingValue}
-        setCurrentValue={setCurrentValue}
-        currentValue={currentValue}
-        operation={operation}
-        waitingValue={waitingValue}
-        displayResult={displayResult}
-        setOperation = {setOperation}
-      />
-
-      <button className="button" onClick={() => getButtonValue(1)}>
-        1
-      </button>
-      <button className="button" onClick={() => getButtonValue(2)}>
-        2
-      </button>
-      <button className="button" onClick={() => getButtonValue(3)}>
-        3
-      </button>
-
-      <PlusButton
         displayValue={displayValue}
         setWaitingValue={setWaitingValue}
         setCurrentValue={setCurrentValue}
@@ -180,13 +134,42 @@ const Buttons = ({
         setOperation={setOperation}
       />
 
-      <button className="button" onClick={() => getButtonValue(0)}>
-        0
-      </button>
+      <input type="button" value={4} onClick={handleButtonClick} />
+      <input type="button" value={5} onClick={handleButtonClick} />
+      <input type="button" value={6} onClick={handleButtonClick} />
+
+      <MinusButton
+        displayValue={displayValue}
+        setWaitingValue={setWaitingValue}
+        setCurrentValue={setCurrentValue}
+        currentValue={currentValue}
+        operation={operation}
+        waitingValue={waitingValue}
+        displayResult={displayResult}
+        setOperation={setOperation}
+      />
+
+      <input type="button" value={1} onClick={handleButtonClick} />
+      <input type="button" value={2} onClick={handleButtonClick} />
+      <input type="button" value={3} onClick={handleButtonClick} />
+
+      <PlusButton
+        displayValue={displayValue}
+        setWaitingValue={setWaitingValue}
+        setCurrentValue={setCurrentValue}
+        operation={operation}
+        waitingValue={waitingValue}
+        displayResult={displayResult}
+        setOperation={setOperation}
+        currentValueAsNumber={currentValueAsNumber}
+        displayValueAsNumber={displayValueAsNumber}
+      />
+
+      <input type="button" value={0} onClick={handleButtonClick} />
+
       <CommaButton
         setDisplayValue={setDisplayValue}
-        displayValue={displayValue}
-        checkResultLength={checkResultLength}
+        displayValueAsString={displayValueAsString}
       />
 
       <EqualsButton displayResult={displayResult} />

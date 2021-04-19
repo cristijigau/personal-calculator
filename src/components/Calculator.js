@@ -20,8 +20,6 @@ const Calculator = () => {
           <div className="middle-section">
             <Display
               displayValue={displayValue}
-              waitingValue={waitingValue}
-              currentValue={currentValue}
             />
           </div>
           <div className="bottom-section">

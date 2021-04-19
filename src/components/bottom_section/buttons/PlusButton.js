@@ -6,11 +6,12 @@ const PlusButton = ({
   displayValue,
   setWaitingValue,
   setCurrentValue,
-  currentValue,
   waitingValue,
   operation,
   displayResult,
-  setOperation
+  setOperation,
+  displayValueAsNumber,
+  currentValueAsNumber
 }) => {
 
   const add = () => {
@@ -18,7 +19,7 @@ const PlusButton = ({
       if (operation !== BLANK) {
         displayResult();
         if (operation === PLUS) {
-          setCurrentValue(Number(currentValue) + Number(displayValue));
+          setCurrentValue(currentValueAsNumber + displayValueAsNumber);
         }
         setWaitingValue(true);
       } else setCurrentValue(displayValue);

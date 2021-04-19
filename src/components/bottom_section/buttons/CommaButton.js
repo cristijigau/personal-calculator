@@ -2,9 +2,8 @@ import React from 'react';
 
 import { BLANK, DOT } from '../../../constants/Constants';
 
-const CommaButton = ({ setDisplayValue, displayValue }) => {
+const CommaButton = ({ setDisplayValue, displayValueAsString }) => {
   const addPrecision = () => {
-    const displayValueAsString = String(displayValue);
     if (displayValueAsString .indexOf(DOT) === -1) {
       setDisplayValue(displayValueAsString + BLANK + DOT);
     }
