@@ -1,21 +1,21 @@
 {
   "files": {
-    "main.css": "/personal-calculator/static/css/main.4875b453.chunk.css",
-    "main.js": "/personal-calculator/static/js/main.ebb26b0a.chunk.js",
-    "main.js.map": "/personal-calculator/static/js/main.ebb26b0a.chunk.js.map",
+    "main.css": "/personal-calculator/static/css/main.4be98442.chunk.css",
+    "main.js": "/personal-calculator/static/js/main.1545626c.chunk.js",
+    "main.js.map": "/personal-calculator/static/js/main.1545626c.chunk.js.map",
     "runtime-main.js": "/personal-calculator/static/js/runtime-main.5030b5fd.js",
     "runtime-main.js.map": "/personal-calculator/static/js/runtime-main.5030b5fd.js.map",
     "static/js/2.a155c3c7.chunk.js": "/personal-calculator/static/js/2.a155c3c7.chunk.js",
     "static/js/2.a155c3c7.chunk.js.map": "/personal-calculator/static/js/2.a155c3c7.chunk.js.map",
     "index.html": "/personal-calculator/index.html",
-    "static/css/main.4875b453.chunk.css.map": "/personal-calculator/static/css/main.4875b453.chunk.css.map",
+    "static/css/main.4be98442.chunk.css.map": "/personal-calculator/static/css/main.4be98442.chunk.css.map",
     "static/js/2.a155c3c7.chunk.js.LICENSE.txt": "/personal-calculator/static/js/2.a155c3c7.chunk.js.LICENSE.txt",
-    "static/media/App.css": "/personal-calculator/static/media/digital-7.93911ab1.ttf"
+    "static/media/App.css": "/personal-calculator/static/media/personal-calculator.fb486aaa.otf"
   },
   "entrypoints": [
     "static/js/runtime-main.5030b5fd.js",
     "static/js/2.a155c3c7.chunk.js",
-    "static/css/main.4875b453.chunk.css",
-    "static/js/main.ebb26b0a.chunk.js"
+    "static/css/main.4be98442.chunk.css",
+    "static/js/main.1545626c.chunk.js"
   ]
 }
