@@ -1,17 +1,14 @@
-import React, { useContext } from 'react';
+import React from 'react';
 
 import {
   BLANK,
   DIVISION,
-  DOT,
   MAX_CHARACTERS,
   MINUS,
   MULTIPLY,
   PERCENTAGE,
   PLUS,
-  ZERO,
 } from '../../constants/Constants';
-import CalculatorContext from '../../contexts/CalculatorContext';
 import {
   AllClearButton,
   CommaButton,
@@ -32,84 +29,58 @@ const Buttons = ({
   setCurrentValue,
   currentValue,
   operation,
+  setOperation
 }) => {
-  const { setOperation } = useContext(CalculatorContext);
-  const calculateLength = str => {
-    let length = 0;
-    for (let i = 0; i < str.length; i++) {
-      length += str.charAt(i) === '1' ? 0.36 : 1;
-    }
-    return length;
-  };
+
+  const currentValueAsNumber = Number(currentValue);
+  const displayValueAsNumber = Number(displayValue);
+  const displayValueAsString = String(displayValue);
+
   const getButtonValue = value => {
-    if (displayValue === ZERO) setDisplayValue(value);
-    else if (calculateLength(displayValue) < MAX_CHARACTERS) {
-      setDisplayValue(displayValue + BLANK + value);
-    }
-    if (waitingValue) {
+    if (displayValue === 0 || waitingValue) {
       setDisplayValue(value);
       setWaitingValue(false);
-    }
+    } else if (displayValueAsString.length < MAX_CHARACTERS)
+      setDisplayValue(displayValue + BLANK + value);
   };
 
-  const checkResultLength = (result, division) => {
-    if (!division && String(result).indexOf(DOT) === -1) {
-      if (calculateLength(String(result)) > MAX_CHARACTERS) {
-        if (String(result)[0] !== MINUS)
-          return String(result).slice(String(result).length - MAX_CHARACTERS);
-        else
-          return (
-            MINUS +
-            String(result).slice(String(result).length - MAX_CHARACTERS - 1)
-          );
-      } else return String(result);
-    } else {
-      if (calculateLength(String(result)) > MAX_CHARACTERS) {
-        if (String(result)[0] !== MINUS)
-          return String(result).slice(0, MAX_CHARACTERS);
-        else return String(result).slice(0, MAX_CHARACTERS);
-      } else return String(result);
-    }
+  const checkResultLength = result => {
+    const resultAsString = String(result);
+    if (resultAsString.length > MAX_CHARACTERS) {
+      return resultAsString.slice(0, MAX_CHARACTERS - 1 ) + 'e';
+    } else return result;
   };
 
   const displayResult = () => {
     switch (operation) {
       case PLUS:
         setDisplayValue(
-          checkResultLength(Number(currentValue) + Number(displayValue))
+          checkResultLength(displayValueAsNumber + currentValueAsNumber)
         );
-        setCurrentValue(String(Number(currentValue) + Number(displayValue)));
+        setCurrentValue(displayValueAsNumber + currentValueAsNumber);
         setWaitingValue(true);
         setOperation(BLANK);
         break;
       case MINUS:
-        setDisplayValue(
-          checkResultLength(Number(currentValue) - Number(displayValue))
-        );
-        setCurrentValue(String(Number(currentValue) - Number(displayValue)));
+        setDisplayValue(checkResultLength(currentValue - displayValue));
+        setCurrentValue(currentValue - displayValue);
         setWaitingValue(true);
         setOperation(BLANK);
         break;
       case MULTIPLY:
-        setDisplayValue(
-          checkResultLength(Number(currentValue) * Number(displayValue))
-        );
-        setCurrentValue(String(Number(currentValue) * Number(displayValue)));
+        setDisplayValue(checkResultLength(currentValue * displayValue));
+        setCurrentValue(currentValue * displayValue);
         setWaitingValue(true);
         setOperation(BLANK);
         break;
       case DIVISION:
-        setDisplayValue(
-          checkResultLength(Number(currentValue) / Number(displayValue), true)
-        );
-        setCurrentValue(String(Number(currentValue) / Number(displayValue)));
+        setDisplayValue(checkResultLength(currentValue / displayValue));
+        setCurrentValue(currentValue / displayValue);
         setWaitingValue(true);
         setOperation(BLANK);
         break;
       case PERCENTAGE:
-        setDisplayValue(
-          checkResultLength(Number(currentValue) * Number(displayValue))
-        );
+        setDisplayValue(checkResultLength(currentValue * displayValue));
         setWaitingValue(true);
         break;
     }
@@ -120,11 +91,12 @@ const Buttons = ({
       <AllClearButton
         setDisplayValue={setDisplayValue}
         setCurrentValue={setCurrentValue}
+        setOperation = {setOperation}
       />
       <SignButton
         displayValue={displayValue}
         setDisplayValue={setDisplayValue}
-        calculateLength={calculateLength}
+        checkResultLength={checkResultLength}
       />
       <PercentageButton
         displayValue={displayValue}
@@ -132,7 +104,7 @@ const Buttons = ({
         setCurrentValue={setCurrentValue}
         currentValue={currentValue}
         setDisplayValue={setDisplayValue}
-        calculateLength={calculateLength}
+        checkResultLength={checkResultLength}
       />
       <DivisionButton
         displayValue={displayValue}
@@ -142,15 +114,16 @@ const Buttons = ({
         operation={operation}
         waitingValue={waitingValue}
         displayResult={displayResult}
+        setOperation = {setOperation}
       />
 
-      <button className="button" onClick={() => getButtonValue('7')}>
+      <button className="button" onClick={() => getButtonValue(7)}>
         7
       </button>
-      <button className="button" onClick={() => getButtonValue('8')}>
+      <button className="button" onClick={() => getButtonValue(8)}>
         8
       </button>
-      <button className="button" onClick={() => getButtonValue('9')}>
+      <button className="button" onClick={() => getButtonValue(9)}>
         9
       </button>
 
@@ -162,15 +135,16 @@ const Buttons = ({
         operation={operation}
         waitingValue={waitingValue}
         displayResult={displayResult}
+        setOperation = {setOperation}
       />
 
-      <button className="button" onClick={() => getButtonValue('4')}>
+      <button className="button" onClick={() => getButtonValue(4)}>
         4
       </button>
-      <button className="button" onClick={() => getButtonValue('5')}>
+      <button className="button" onClick={() => getButtonValue(5)}>
         5
       </button>
-      <button className="button" onClick={() => getButtonValue('6')}>
+      <button className="button" onClick={() => getButtonValue(6)}>
         6
       </button>
 
@@ -182,15 +156,16 @@ const Buttons = ({
         operation={operation}
         waitingValue={waitingValue}
         displayResult={displayResult}
+        setOperation = {setOperation}
       />
 
-      <button className="button" onClick={() => getButtonValue('1')}>
+      <button className="button" onClick={() => getButtonValue(1)}>
         1
       </button>
-      <button className="button" onClick={() => getButtonValue('2')}>
+      <button className="button" onClick={() => getButtonValue(2)}>
         2
       </button>
-      <button className="button" onClick={() => getButtonValue('3')}>
+      <button className="button" onClick={() => getButtonValue(3)}>
         3
       </button>
 
@@ -202,15 +177,16 @@ const Buttons = ({
         operation={operation}
         waitingValue={waitingValue}
         displayResult={displayResult}
+        setOperation={setOperation}
       />
 
-      <button className="button" onClick={() => getButtonValue(ZERO)}>
+      <button className="button" onClick={() => getButtonValue(0)}>
         0
       </button>
       <CommaButton
         setDisplayValue={setDisplayValue}
         displayValue={displayValue}
-        calculateLength={calculateLength}
+        checkResultLength={checkResultLength}
       />
 
       <EqualsButton displayResult={displayResult} />

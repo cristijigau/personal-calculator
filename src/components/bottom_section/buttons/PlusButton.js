@@ -1,7 +1,6 @@
-import React, { useContext } from 'react';
+import React from 'react';
 
 import { BLANK, PLUS } from '../../../constants/Constants';
-import CalculatorContext from '../../../contexts/CalculatorContext';
 
 const PlusButton = ({
   displayValue,
@@ -11,14 +10,15 @@ const PlusButton = ({
   waitingValue,
   operation,
   displayResult,
+  setOperation
 }) => {
-  const { setOperation } = useContext(CalculatorContext);
+
   const add = () => {
     if (!waitingValue) {
       if (operation !== BLANK) {
         displayResult();
         if (operation === PLUS) {
-          setCurrentValue(String(Number(currentValue) + Number(displayValue)));
+          setCurrentValue(Number(currentValue) + Number(displayValue));
         }
         setWaitingValue(true);
       } else setCurrentValue(displayValue);

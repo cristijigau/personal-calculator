@@ -1,32 +1,17 @@
 import React from 'react';
 
-import { MAX_CHARACTERS, ZERO } from '../../../constants/Constants';
-
 const PercentageButton = ({
   displayValue,
   setWaitingValue,
   setDisplayValue,
   currentValue,
-  calculateLength,
+  checkResultLength,
 }) => {
   const percentage = () => {
-    if (currentValue === ZERO) {
-      setDisplayValue(
-        calculateLength(String(Number(displayValue) / 100)) > MAX_CHARACTERS
-          ? String(Number(displayValue) / 100).slice(0, MAX_CHARACTERS)
-          : String(Number(displayValue) / 100)
-      );
+    if (currentValue === 0) {
+      setDisplayValue(checkResultLength(displayValue / 100));
     } else
-      setDisplayValue(
-        calculateLength(
-          String(Number(displayValue) * Number(currentValue / 100))
-        ) > MAX_CHARACTERS
-          ? String(Number(displayValue) * Number(currentValue / 100)).slice(
-              0,
-              MAX_CHARACTERS
-            )
-          : String(Number(displayValue) * Number(currentValue / 100))
-      );
+      setDisplayValue(checkResultLength((displayValue * currentValue) / 100));
     setWaitingValue(true);
   };
   return (

@@ -1,13 +1,12 @@
 import React from 'react';
 
-import { BLANK, DOT, MAX_CHARACTERS } from '../../../constants/Constants';
+import { BLANK, DOT } from '../../../constants/Constants';
 
-const CommaButton = ({ setDisplayValue, displayValue, calculateLength }) => {
+const CommaButton = ({ setDisplayValue, displayValue }) => {
   const addPrecision = () => {
-    if (displayValue.indexOf(DOT) === -1) {
-      calculateLength(displayValue) >= MAX_CHARACTERS
-        ? setDisplayValue(displayValue.slice(1) + BLANK + DOT)
-        : setDisplayValue(displayValue + BLANK + DOT);
+    const displayValueAsString = String(displayValue);
+    if (displayValueAsString .indexOf(DOT) === -1) {
+      setDisplayValue(displayValueAsString + BLANK + DOT);
     }
   };
   return (

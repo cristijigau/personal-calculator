@@ -1,12 +1,12 @@
 import './App.css';
 import React from 'react';
 
-import MainView from './components/MainView';
+import Calcualtor from './components/Calculator';
 
 function App() {
   return (
     <div className="App">
-      <MainView />
+      <Calcualtor />
     </div>
   );
 }

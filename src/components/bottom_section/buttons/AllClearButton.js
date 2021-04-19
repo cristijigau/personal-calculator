@@ -1,13 +1,11 @@
-import React, { useContext } from 'react';
+import React from 'react';
 
-import { BLANK, ZERO } from '../../../constants/Constants';
-import CalculatorContext from '../../../contexts/CalculatorContext';
+import { BLANK } from '../../../constants/Constants';
 
-const AllClearButton = ({ setDisplayValue, setCurrentValue }) => {
-  const { setOperation } = useContext(CalculatorContext);
+const AllClearButton = ({ setDisplayValue, setCurrentValue, setOperation }) => {
   const clearAll = () => {
-    setDisplayValue(ZERO);
-    setCurrentValue(ZERO);
+    setDisplayValue(0);
+    setCurrentValue(0);
     setOperation(BLANK);
   };
   return (

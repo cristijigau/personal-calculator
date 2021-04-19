@@ -1,7 +1,6 @@
-import React, { useContext } from 'react';
+import React from 'react';
 
 import { BLANK, DIVISION } from '../../../constants/Constants';
-import CalculatorContext from '../../../contexts/CalculatorContext';
 
 const DivisionButton = ({
   setCurrentValue,
@@ -11,14 +10,14 @@ const DivisionButton = ({
   operation,
   waitingValue,
   displayResult,
+  setOperation
 }) => {
-  const { setOperation } = useContext(CalculatorContext);
   const divide = () => {
     if (!waitingValue) {
       if (operation !== BLANK) {
         displayResult();
         if (operation === DIVISION) {
-          setCurrentValue(String(Number(currentValue) / Number(displayValue)));
+          setCurrentValue(currentValue / displayValue);
         }
         setWaitingValue(true);
       } else setCurrentValue(displayValue);
