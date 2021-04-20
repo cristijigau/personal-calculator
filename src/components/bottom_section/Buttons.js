@@ -35,10 +35,6 @@ const Buttons = ({
   const displayValueAsNumber = Number(displayValue);
   const displayValueAsString = String(displayValue);
 
-  const handleButtonClick = ({ target: { value } }) => {
-    getButtonValue(value);
-  };
-
   const getButtonValue = value => {
     if (displayValue === 0 || waitingValue) {
       setDisplayValue(value);
@@ -54,37 +50,29 @@ const Buttons = ({
     } else return result;
   };
 
+  const setCalculatorState = value => {
+    setDisplayValue(checkResultLength(value));
+    setCurrentValue(value);
+    setWaitingValue(true);
+    setOperation(BLANK);
+  };
+
   const displayResult = () => {
     switch (operation) {
       case PLUS:
-        setDisplayValue(
-          checkResultLength(displayValueAsNumber + currentValueAsNumber)
-        );
-        setCurrentValue(displayValueAsNumber + currentValueAsNumber);
-        setWaitingValue(true);
-        setOperation(BLANK);
+        setCalculatorState(displayValueAsNumber + currentValueAsNumber);
         break;
       case MINUS:
-        setDisplayValue(checkResultLength(currentValue - displayValue));
-        setCurrentValue(currentValue - displayValue);
-        setWaitingValue(true);
-        setOperation(BLANK);
+        setCalculatorState(currentValue - displayValue);
         break;
       case MULTIPLY:
-        setDisplayValue(checkResultLength(currentValue * displayValue));
-        setCurrentValue(currentValue * displayValue);
-        setWaitingValue(true);
-        setOperation(BLANK);
+        setCalculatorState(currentValue * displayValue);
         break;
       case DIVISION:
-        setDisplayValue(checkResultLength(currentValue / displayValue));
-        setCurrentValue(currentValue / displayValue);
-        setWaitingValue(true);
-        setOperation(BLANK);
+        setCalculatorState(currentValue / displayValue);
         break;
       case PERCENTAGE:
-        setDisplayValue(checkResultLength(currentValue * displayValue));
-        setWaitingValue(true);
+        setCalculatorState(currentValue * displayValue);
         break;
     }
   };
@@ -119,9 +107,9 @@ const Buttons = ({
         setOperation={setOperation}
       />
 
-      <input type="button" value={7} onClick={handleButtonClick} />
-      <input type="button" value={8} onClick={handleButtonClick} />
-      <input type="button" value={9} onClick={handleButtonClick} />
+      <button onClick={() => getButtonValue(7)}> 7 </button>
+      <button onClick={() => getButtonValue(8)}> 8 </button>
+      <button onClick={() => getButtonValue(9)}> 9 </button>
 
       <MultiplyButton
         displayValue={displayValue}
@@ -134,9 +122,9 @@ const Buttons = ({
         setOperation={setOperation}
       />
 
-      <input type="button" value={4} onClick={handleButtonClick} />
-      <input type="button" value={5} onClick={handleButtonClick} />
-      <input type="button" value={6} onClick={handleButtonClick} />
+      <button onClick={() => getButtonValue(4)}> 4 </button>
+      <button onClick={() => getButtonValue(5)}> 5 </button>
+      <button onClick={() => getButtonValue(6)}> 6 </button>
 
       <MinusButton
         displayValue={displayValue}
@@ -149,9 +137,9 @@ const Buttons = ({
         setOperation={setOperation}
       />
 
-      <input type="button" value={1} onClick={handleButtonClick} />
-      <input type="button" value={2} onClick={handleButtonClick} />
-      <input type="button" value={3} onClick={handleButtonClick} />
+      <button onClick={() => getButtonValue(1)}> 1 </button>
+      <button onClick={() => getButtonValue(2)}> 2 </button>
+      <button onClick={() => getButtonValue(3)}> 3 </button>
 
       <PlusButton
         displayValue={displayValue}
@@ -165,7 +153,7 @@ const Buttons = ({
         displayValueAsNumber={displayValueAsNumber}
       />
 
-      <input type="button" value={0} onClick={handleButtonClick} />
+      <button onClick={() => getButtonValue(0)}> 0 </button>
 
       <CommaButton
         setDisplayValue={setDisplayValue}
